@@ -1,3 +1,12 @@
+""" git remote add origin https://github.com/Caston1984/Survival-Reinforcement-Learning.git
+git branch -M main
+git push -u origin main """
+
+#python3 -m venv survival_rl  #my virtual environment
+#source survival_rl/bin/activate #activate my virtual environment 
+# pip3 install flask
+# deactivate
+
 from cProfile import label
 from logging.handlers import DEFAULT_SOAP_LOGGING_PORT
 import numpy as np
