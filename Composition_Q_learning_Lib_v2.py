@@ -28,7 +28,7 @@ class Q_learn_composition():
         # Environment parameters
         self.all_goal_pos = random.sample(self.goal_init(), goal_size) # Initialise the whole possible grid state's space as goals[(g1_x, g1_y), (g2_x, g2_y), (g3_x, g3_y), (g4_x, g4_y)]
         print('All goal', self.all_goal_pos)
-        self.loaded_goals = self.all_goal_pos
+        self.loaded_goals = self.all_goal_pos[:10]
         #print('Loaded goals', self.loaded_goals)
         self.start_pos = random.choice(self.goal_init())
         print('Start position', self.start_pos)
@@ -238,8 +238,8 @@ class Q_learn_composition():
         return list(set(self.base_1) ^ set(self.base_2))
 
     def base_constructor(self):
-        base_1 = random.sample(self.loaded_goals, k=self.base_goal_size)
-        base_2 = random.sample(self.loaded_goals, k=self.base_goal_size)
+        base_1 = random.sample(self.loaded_goals, k=7)
+        base_2 = random.sample(self.loaded_goals, k=7)
 
         return base_1, base_2
 

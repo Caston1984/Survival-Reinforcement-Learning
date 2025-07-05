@@ -24,7 +24,7 @@ class Q_learning():
         # Environment parameters
         self.all_goal_pos = random.sample(self.goal_init(), goal_size)
         #print('All goals', self.all_goal_pos)
-        self.loaded_goals = self.all_goal_pos
+        self.loaded_goals = self.all_goal_pos[:10]
         #print('Loaded goals', self.loaded_goals)
         self.goals = [[pos, pos] for pos in self.all_goal_pos]
         self.start_pos = random.choice(self.goal_init())
