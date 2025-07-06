@@ -7,8 +7,6 @@ git push -u origin main """
 # pip3 install flask
 # deactivate
 
-from cProfile import label
-from logging.handlers import DEFAULT_SOAP_LOGGING_PORT
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -41,8 +39,8 @@ def snapshot():
 
     step = 2
     x = np.arange(0, 2000, step)
-    goal_sizes = [7, 16, 32, 47, 53, 61, 76]
-    seeds = [5, 23, 51, 61, 94]
+    goal_sizes = [10, 20, 30, 40, 50, 60, 70]
+    seeds = [23, 51, 61, 94]
     directories = ['./trajectories/data2/exp_1', './trajectories/data2/exp_2', './trajectories/data2/exp_3', './trajectories/data2/exp_4', 
                    './trajectories/data2/exp_5', './trajectories/data2/exp_6', './trajectories/data2/exp_7', './trajectories/data2/exp_8', 
                    './trajectories/data2/exp_9', './trajectories/data2/exp_10', './trajectories/data2/exp_11', './trajectories/data2/exp_12',
@@ -51,22 +49,22 @@ def snapshot():
     a = {}
     b = {}
     c = {}
-    # 20 experiments seedings, 7 goal sizes, 5 experiments seeds each with compositional rl, goal rl and q-learning rewards list of a 1000 episodes
-    # This gives a overall reward matrix 'mat' of [20, 7, 5, 3, 1000] 
+    # 20 experiments seedings, 7 goal sizes, 4 experiments seeds each with compositional rl, goal rl and q-learning rewards list of a 2000 episodes
+    # This gives a overall reward matrix 'mat' of [20, 7, 4, 3, 1000] 
     experiment_ls = [] 
-    for index, directory in enumerate(directories):                    
-        print('Exp', index)  
+    for index, directory in enumerate(directories):                   
+         
         goal_ls = [] 
-        for goal_size in goal_sizes:              
+        for goal_size in goal_sizes:                          
             seed_ls = []           
-            for seed in seeds:  
+            for seed in seeds:                 
                 reward_ls = []              
                 file_1 = 'ep_rewards_composition_%s_%r.npy' % (seed, goal_size)
-                file_path_1 = os.path.join(directory, file_1)
+                file_path_1 = os.path.join(directory, file_1)                
                 file_2 = 'ep_rewards_goal_%s_%r.npy' % (seed, goal_size)
                 file_path_2 = os.path.join(directory, file_2)
                 file_3 = 'ep_rewards_q_learning_%s_%r.npy' % (seed, goal_size)
-                file_path_3 = os.path.join(directory, file_3)
+                file_path_3 = os.path.join(directory, file_3)                
                 comp_rl = np.load(file_path_1)
                 goal_rl = np.load(file_path_2)
                 qlearn_rl = np.load(file_path_3)
@@ -122,82 +120,82 @@ def compare():
         experiment_ls = pickle.load(f)
     
     # Calculating the reward mean and standard deviation
-    #[7, 16, 32, 47, 53, 61, 76]
-    goal_size_c_7 = []
-    goal_size_g_7 = []
-    goal_size_q_7 = []     
-    goal_size_c_16 = []
-    goal_size_g_16 = []
-    goal_size_q_16 = [] 
-    goal_size_c_32 = []
-    goal_size_g_32 = []
-    goal_size_q_32 = [] 
-    goal_size_c_47 = []
-    goal_size_g_47 = []
-    goal_size_q_47 = [] 
-    goal_size_c_53 = []
-    goal_size_g_53 = []
-    goal_size_q_53 = []
-    goal_size_c_61 = []
-    goal_size_g_61 = []
-    goal_size_q_61 = []
-    goal_size_c_76 = []
-    goal_size_g_76 = []
-    goal_size_q_76 = [] 
+    #[10, 20, 30, 40, 50, 60, 70]
+    goal_size_c_10 = []
+    goal_size_g_10 = []
+    goal_size_q_10 = []     
+    goal_size_c_20 = []
+    goal_size_g_20 = []
+    goal_size_q_20 = [] 
+    goal_size_c_30 = []
+    goal_size_g_30 = []
+    goal_size_q_30 = [] 
+    goal_size_c_40 = []
+    goal_size_g_40 = []
+    goal_size_q_40 = [] 
+    goal_size_c_50 = []
+    goal_size_g_50 = []
+    goal_size_q_50 = []
+    goal_size_c_60 = []
+    goal_size_g_60 = []
+    goal_size_q_60 = []
+    goal_size_c_70 = []
+    goal_size_g_70 = []
+    goal_size_q_70 = [] 
     
     # Calculating the steps taken and and the interquartile range
-    #[7, 16, 32, 47, 53, 61, 76]
-    step_goal_size_c_7 = []
-    step_goal_size_g_7 = []
-    step_goal_size_q_7 = []     
-    step_goal_size_c_16 = []
-    step_goal_size_g_16 = []
-    step_goal_size_q_16 = [] 
-    step_goal_size_c_32 = []
-    step_goal_size_g_32 = []
-    step_goal_size_q_32 = [] 
-    step_goal_size_c_47 = []
-    step_goal_size_g_47 = []
-    step_goal_size_q_47 = [] 
-    step_goal_size_c_53 = []
-    step_goal_size_g_53 = []
-    step_goal_size_q_53 = []
-    step_goal_size_c_61 = []
-    step_goal_size_g_61 = []
-    step_goal_size_q_61 = []
-    step_goal_size_c_76 = []
-    step_goal_size_g_76 = []
-    step_goal_size_q_76 = [] 
+    #[10, 20, 30, 40, 50, 60, 70]
+    step_goal_size_c_10 = []
+    step_goal_size_g_10 = []
+    step_goal_size_q_10 = []     
+    step_goal_size_c_20 = []
+    step_goal_size_g_20 = []
+    step_goal_size_q_20 = [] 
+    step_goal_size_c_30 = []
+    step_goal_size_g_30 = []
+    step_goal_size_q_30 = [] 
+    step_goal_size_c_40 = []
+    step_goal_size_g_40 = []
+    step_goal_size_q_40 = [] 
+    step_goal_size_c_50 = []
+    step_goal_size_g_50 = []
+    step_goal_size_q_50 = []
+    step_goal_size_c_60 = []
+    step_goal_size_g_60 = []
+    step_goal_size_q_60 = []
+    step_goal_size_c_70 = []
+    step_goal_size_g_70 = []
+    step_goal_size_q_70 = [] 
             
     comp_ls = []
     goal_ls = []
     q_learning_ls = []   
     nr_exp = 20      
-    goal_sizes = [7, 16, 32, 47, 53, 61, 76]
-    seeds = [5, 23, 51, 61, 94]
+    goal_sizes = [10, 20, 30, 40, 50, 60, 70]
+    seeds = [23, 51, 61, 94]
     
     #list to store the last numbers per goal size for all experiments
-    x_7 = []
-    x_16 = []
-    x_32 = []
-    x_47 = []
-    x_53 = []
-    x_61 = []
-    x_76 = []
-    b_7 = []
-    b_16 = []
-    b_32 = []
-    b_47 = []
-    b_53 = []
-    b_61 = []
-    b_76 = []
-    c_7 = []
-    c_16 = []
-    c_32 = []
-    c_47 = []
-    c_53 = []
-    c_61 = []
-    c_76 = []
+    x_10 = []
+    x_20 = []
+    x_30 = []
+    x_40 = []
+    x_50 = []
+    x_60 = []
+    x_70 = []
+    b_10 = []
+    b_20 = []
+    b_30 = []
+    b_40 = []
+    b_50 = []
+    b_60 = []
+    b_70 = []
+    c_10 = []
+    c_20 = []
+    c_30 = []
+    c_40 = []
+    c_50 = []
+    c_60 = []
+    c_70 = []
          
     for a in range(nr_exp):        
         for b, goal_size in enumerate(goal_sizes):  
@@ -216,16 +214,16 @@ def compare():
                 
                # plt.boxplot(step_comp)
                # plt.show()
-                
+                """ title = 'Number of steps per episode, experiment %u, goal size %s, seed %r' %(a, goal_size, seed)
                 # plotting the steps vs episode graph
-                """ plt.plot(x, step_comp, label='Compositional RL')
+                plt.plot(x, step_comp, label='Compositional RL')
                 plt.plot(x, step_goal, label='Goal Oriented RL')
                 plt.plot(x, step_q_learning, label= 'Q learning RL')
-                plt.title('Number of steps per episode')    
+                plt.title(title)    
                 plt.ylabel('Steps')
                 plt.xlabel('Episode')
-                plt.show() """
-                
+                plt.show()
+                 """
                 # Goal Size view stats
                 g_comp.append(comp)
                 g_goal.append(goal)
@@ -234,78 +232,78 @@ def compare():
                 comp_ls.append(comp)
                 goal_ls.append(goal)
                 q_learning_ls.append(q_learning)
-                if goal_size == 7:
-                    goal_size_c_7.append(experiment_ls[a][b][c][0])
-                    goal_size_g_7.append(experiment_ls[a][b][c][1])
-                    goal_size_q_7.append(experiment_ls[a][b][c][2])
-                    x_7.append(comp[-1])
-                    b_7.append(goal[-1])
-                    c_7.append(q_learning[-1])
-                    step_goal_size_c_7.append(step_comp)
-                    step_goal_size_g_7.append(step_goal)
-                    step_goal_size_q_7.append(step_q_learning)
-                if goal_size == 16:
-                    goal_size_c_16.append(experiment_ls[a][b][c][0])
-                    goal_size_g_16.append(experiment_ls[a][b][c][1])
-                    goal_size_q_16.append(experiment_ls[a][b][c][2])
-                    x_16.append(comp[-1])
-                    b_16.append(goal[-1])
-                    c_16.append(q_learning[-1])
-                    step_goal_size_c_16.append(step_comp)
-                    step_goal_size_g_16.append(step_goal)
-                    step_goal_size_q_16.append(step_q_learning)
-                if goal_size == 32:
-                    goal_size_c_32.append(experiment_ls[a][b][c][0])
-                    goal_size_g_32.append(experiment_ls[a][b][c][1])
-                    goal_size_q_32.append(experiment_ls[a][b][c][2])
-                    x_32.append(comp[-1])
-                    b_32.append(goal[-1])
-                    c_32.append(q_learning[-1])
-                    step_goal_size_c_32.append(step_comp)
-                    step_goal_size_g_32.append(step_goal)
-                    step_goal_size_q_32.append(step_q_learning)
-                if goal_size == 47:
-                    goal_size_c_47.append(experiment_ls[a][b][c][0])
-                    goal_size_g_47.append(experiment_ls[a][b][c][1])
-                    goal_size_q_47.append(experiment_ls[a][b][c][2])
-                    x_47.append(comp[-1])
-                    b_47.append(goal[-1])
-                    c_47.append(q_learning[-1])
-                    step_goal_size_c_47.append(step_comp)
-                    step_goal_size_g_47.append(step_goal)
-                    step_goal_size_q_47.append(step_q_learning)
-                if goal_size == 53:
-                    goal_size_c_53.append(experiment_ls[a][b][c][0])
-                    goal_size_g_53.append(experiment_ls[a][b][c][1])
-                    goal_size_q_53.append(experiment_ls[a][b][c][2])
-                    x_53.append(comp[-1])
-                    b_53.append(goal[-1])
-                    c_53.append(q_learning[-1])
-                    b_53.append(goal[-1])
-                    c_53.append(q_learning[-1])
-                    step_goal_size_c_53.append(step_comp)
-                    step_goal_size_g_53.append(step_goal)
-                    step_goal_size_q_53.append(step_q_learning)
-                if goal_size == 61:
-                    goal_size_c_61.append(experiment_ls[a][b][c][0])
-                    goal_size_g_61.append(experiment_ls[a][b][c][1])
-                    goal_size_q_61.append(experiment_ls[a][b][c][2])
-                    x_61.append(comp[-1])
-                    b_61.append(goal[-1])
-                    c_61.append(q_learning[-1])
-                    step_goal_size_c_61.append(step_comp)
-                    step_goal_size_g_61.append(step_goal)
-                    step_goal_size_q_61.append(step_q_learning)
-                if goal_size == 76:
-                    goal_size_c_76.append(experiment_ls[a][b][c][0])
-                    goal_size_g_76.append(experiment_ls[a][b][c][1])
-                    goal_size_q_76.append(experiment_ls[a][b][c][2])
-                    x_76.append(comp[-1])
-                    b_76.append(goal[-1])
-                    c_76.append(q_learning[-1])
-                    step_goal_size_c_76.append(step_comp)
-                    step_goal_size_g_76.append(step_goal)
-                    step_goal_size_q_76.append(step_q_learning)
+                if goal_size == 10:
+                    goal_size_c_10.append(experiment_ls[a][b][c][0])
+                    goal_size_g_10.append(experiment_ls[a][b][c][1])
+                    goal_size_q_10.append(experiment_ls[a][b][c][2])
+                    x_10.append(comp[-1])
+                    b_10.append(goal[-1])
+                    c_10.append(q_learning[-1])
+                    step_goal_size_c_10.append(step_comp)
+                    step_goal_size_g_10.append(step_goal)
+                    step_goal_size_q_10.append(step_q_learning)
+                if goal_size == 20:
+                    goal_size_c_20.append(experiment_ls[a][b][c][0])
+                    goal_size_g_20.append(experiment_ls[a][b][c][1])
+                    goal_size_q_20.append(experiment_ls[a][b][c][2])
+                    x_20.append(comp[-1])
+                    b_20.append(goal[-1])
+                    c_20.append(q_learning[-1])
+                    step_goal_size_c_20.append(step_comp)
+                    step_goal_size_g_20.append(step_goal)
+                    step_goal_size_q_20.append(step_q_learning)
+                if goal_size == 30:
+                    goal_size_c_30.append(experiment_ls[a][b][c][0])
+                    goal_size_g_30.append(experiment_ls[a][b][c][1])
+                    goal_size_q_30.append(experiment_ls[a][b][c][2])
+                    x_30.append(comp[-1])
+                    b_30.append(goal[-1])
+                    c_30.append(q_learning[-1])
+                    step_goal_size_c_30.append(step_comp)
+                    step_goal_size_g_30.append(step_goal)
+                    step_goal_size_q_30.append(step_q_learning)
+                if goal_size == 40:
+                    goal_size_c_40.append(experiment_ls[a][b][c][0])
+                    goal_size_g_40.append(experiment_ls[a][b][c][1])
+                    goal_size_q_40.append(experiment_ls[a][b][c][2])
+                    x_40.append(comp[-1])
+                    b_40.append(goal[-1])
+                    c_40.append(q_learning[-1])
+                    step_goal_size_c_40.append(step_comp)
+                    step_goal_size_g_40.append(step_goal)
+                    step_goal_size_q_40.append(step_q_learning)
+                if goal_size == 50:
+                    goal_size_c_50.append(experiment_ls[a][b][c][0])
+                    goal_size_g_50.append(experiment_ls[a][b][c][1])
+                    goal_size_q_50.append(experiment_ls[a][b][c][2])
+                    x_50.append(comp[-1])
+                    b_50.append(goal[-1])
+                    c_50.append(q_learning[-1])
+                    b_50.append(goal[-1])
+                    c_50.append(q_learning[-1])
+                    step_goal_size_c_50.append(step_comp)
+                    step_goal_size_g_50.append(step_goal)
+                    step_goal_size_q_50.append(step_q_learning)
+                if goal_size == 60:
+                    goal_size_c_60.append(experiment_ls[a][b][c][0])
+                    goal_size_g_60.append(experiment_ls[a][b][c][1])
+                    goal_size_q_60.append(experiment_ls[a][b][c][2])
+                    x_60.append(comp[-1])
+                    b_60.append(goal[-1])
+                    c_60.append(q_learning[-1])
+                    step_goal_size_c_60.append(step_comp)
+                    step_goal_size_g_60.append(step_goal)
+                    step_goal_size_q_60.append(step_q_learning)
+                if goal_size == 70:
+                    goal_size_c_70.append(experiment_ls[a][b][c][0])
+                    goal_size_g_70.append(experiment_ls[a][b][c][1])
+                    goal_size_q_70.append(experiment_ls[a][b][c][2])
+                    x_70.append(comp[-1])
+                    b_70.append(goal[-1])
+                    c_70.append(q_learning[-1])
+                    step_goal_size_c_70.append(step_comp)
+                    step_goal_size_g_70.append(step_goal)
+                    step_goal_size_q_70.append(step_q_learning)
             
              
             #title = 'Experiment %u: Reward curve for goal size %s' %(a, goal_size)
@@ -319,167 +317,175 @@ def compare():
             #plt.show()
             
     # Mean and Standard Deviation Plots per goal                
-    ''' goal_mean_c_7 = np.mean(goal_size_c_7, axis=0)        
-    goal_std_c_7 = np.std(goal_size_c_7, axis=0)
-    goal_mean_g_7 = np.mean(goal_size_g_7, axis=0)
-    goal_std_g_7 = np.std(goal_size_g_7, axis=0)
-    goal_mean_q_7 = np.mean(goal_size_q_7, axis=0)
-    goal_std_q_7 = np.std(goal_size_q_7, axis=0)
+    goal_mean_c_10 = np.mean(goal_size_c_10, axis=0)        
+    goal_std_c_10 = np.std(goal_size_c_10, axis=0)
+    goal_mean_g_10 = np.mean(goal_size_g_10, axis=0)
+    goal_std_g_10 = np.std(goal_size_g_10, axis=0)
+    goal_mean_q_10 = np.mean(goal_size_q_10, axis=0)
+    goal_std_q_10 = np.std(goal_size_q_10, axis=0)
             
-    plt.plot(x, goal_mean_c_7, label='Compositional RL')
-    plt.fill_between(x, goal_mean_c_7-goal_std_c_7, goal_mean_c_7+goal_std_c_7, alpha=0.2)
-    plt.plot(x, goal_mean_g_7, label='Goal Oriented RL')
-    plt.fill_between(x, goal_mean_g_7-goal_std_g_7, goal_mean_g_7+goal_std_g_7, alpha=0.2)
-    plt.plot(x, goal_mean_q_7, label='Q Learning')
-    plt.fill_between(x, goal_mean_q_7-goal_std_q_7, goal_mean_q_7+goal_std_q_7, alpha=0.2)
+    plt.plot(x, goal_mean_c_10, label='Compositional RL')
+    plt.fill_between(x, goal_mean_c_10-goal_std_c_10, goal_mean_c_10+goal_std_c_10, alpha=0.2)
+    plt.plot(x, goal_mean_g_10, label='Goal Oriented RL')
+    plt.fill_between(x, goal_mean_g_10-goal_std_g_10, goal_mean_g_10+goal_std_g_10, alpha=0.2)
+    plt.plot(x, goal_mean_q_10, label='Q Learning')
+    plt.fill_between(x, goal_mean_q_10-goal_std_q_10, goal_mean_q_10+goal_std_q_10, alpha=0.2)
+    plt.legend()
     plt.ylabel('Rewards')
     plt.xlabel('Episodes')
-    plt.title('Average shaded plot for all 7 goal experiments')
+    plt.title('Average shaded plot for all 10 goal experiments')
     plt.show()
             
-    goal_mean_c_16 = np.mean(goal_size_c_16, axis=0)        
-    goal_std_c_16 = np.std(goal_size_c_16, axis=0)
-    goal_mean_g_16 = np.mean(goal_size_g_16, axis=0)
-    goal_std_g_16 = np.std(goal_size_g_16, axis=0)
-    goal_mean_q_16 = np.mean(goal_size_q_16, axis=0)
-    goal_std_q_16 = np.std(goal_size_q_16, axis=0)
+    goal_mean_c_20 = np.mean(goal_size_c_20, axis=0)        
+    goal_std_c_20 = np.std(goal_size_c_20, axis=0)
+    goal_mean_g_20 = np.mean(goal_size_g_20, axis=0)
+    goal_std_g_20 = np.std(goal_size_g_20, axis=0)
+    goal_mean_q_20 = np.mean(goal_size_q_20, axis=0)
+    goal_std_q_20 = np.std(goal_size_q_20, axis=0)
             
-    plt.plot(x, goal_mean_c_16, label='Compositional RL')
-    plt.fill_between(x, goal_mean_c_16-goal_std_c_16, goal_mean_c_16+goal_std_c_16, alpha=0.2)
-    plt.plot(x, goal_mean_g_16, label='Goal Oriented RL')
-    plt.fill_between(x, goal_mean_g_16-goal_std_g_16, goal_mean_g_16+goal_std_g_16, alpha=0.2)
-    plt.plot(x, goal_mean_q_16, label='Q Learning')
-    plt.fill_between(x, goal_mean_q_16-goal_std_q_16, goal_mean_q_16+goal_std_q_16, alpha=0.2)
+    plt.plot(x, goal_mean_c_20, label='Compositional RL')
+    plt.fill_between(x, goal_mean_c_20-goal_std_c_20, goal_mean_c_20+goal_std_c_20, alpha=0.2)
+    plt.plot(x, goal_mean_g_20, label='Goal Oriented RL')
+    plt.fill_between(x, goal_mean_g_20-goal_std_g_20, goal_mean_g_20+goal_std_g_20, alpha=0.2)
+    plt.plot(x, goal_mean_q_20, label='Q Learning')
+    plt.fill_between(x, goal_mean_q_20-goal_std_q_20, goal_mean_q_20+goal_std_q_20, alpha=0.2)
+    plt.legend()
     plt.ylabel('Rewards')
     plt.xlabel('Episodes')
-    plt.title('Average shaded plot for all 16 goal experiments')
+    plt.title('Average shaded plot for all 20 goal experiments')
     plt.show()
             
-    goal_mean_c_32 = np.mean(goal_size_c_32, axis=0)        
-    goal_std_c_32 = np.std(goal_size_c_32, axis=0)
-    goal_mean_g_32 = np.mean(goal_size_g_32, axis=0)
-    goal_std_g_32 = np.std(goal_size_g_32, axis=0)
-    goal_mean_q_32 = np.mean(goal_size_q_32, axis=0)
-    goal_std_q_32 = np.std(goal_size_q_32, axis=0)
+    goal_mean_c_30 = np.mean(goal_size_c_30, axis=0)        
+    goal_std_c_30 = np.std(goal_size_c_30, axis=0)
+    goal_mean_g_30 = np.mean(goal_size_g_30, axis=0)
+    goal_std_g_30 = np.std(goal_size_g_30, axis=0)
+    goal_mean_q_30 = np.mean(goal_size_q_30, axis=0)
+    goal_std_q_30 = np.std(goal_size_q_30, axis=0)
             
-    plt.plot(x, goal_mean_c_32, label='Compositional RL')
-    plt.fill_between(x, goal_mean_c_32-goal_std_c_32, goal_mean_c_32+goal_std_c_32, alpha=0.2)
-    plt.plot(x, goal_mean_g_32, label='Goal Oriented RL')
-    plt.fill_between(x, goal_mean_g_32-goal_std_g_32, goal_mean_g_32+goal_std_g_32, alpha=0.2)
-    plt.plot(x, goal_mean_q_32, label='Q Learning')
-    plt.fill_between(x, goal_mean_q_32-goal_std_q_32, goal_mean_q_32+goal_std_q_32, alpha=0.2)
+    plt.plot(x, goal_mean_c_30, label='Compositional RL')
+    plt.fill_between(x, goal_mean_c_30-goal_std_c_30, goal_mean_c_30+goal_std_c_30, alpha=0.2)
+    plt.plot(x, goal_mean_g_30, label='Goal Oriented RL')
+    plt.fill_between(x, goal_mean_g_30-goal_std_g_30, goal_mean_g_30+goal_std_g_30, alpha=0.2)
+    plt.plot(x, goal_mean_q_30, label='Q Learning')
+    plt.fill_between(x, goal_mean_q_30-goal_std_q_30, goal_mean_q_30+goal_std_q_30, alpha=0.2)
+    plt.legend()
     plt.ylabel('Rewards')
     plt.xlabel('Episodes')
-    plt.title('Average shaded plot for all 32 goal experiments')
+    plt.title('Average shaded plot for all 30 goal experiments')
     plt.show()
             
-    goal_mean_c_47 = np.mean(goal_size_c_47, axis=0)        
-    goal_std_c_47 = np.std(goal_size_c_47, axis=0)
-    goal_mean_g_47 = np.mean(goal_size_g_47, axis=0)
-    goal_std_g_47 = np.std(goal_size_g_47, axis=0)
-    goal_mean_q_47 = np.mean(goal_size_q_47, axis=0)
-    goal_std_q_47 = np.std(goal_size_q_47, axis=0)
+    goal_mean_c_40 = np.mean(goal_size_c_40, axis=0)        
+    goal_std_c_40 = np.std(goal_size_c_40, axis=0)
+    goal_mean_g_40 = np.mean(goal_size_g_40, axis=0)
+    goal_std_g_40 = np.std(goal_size_g_40, axis=0)
+    goal_mean_q_40 = np.mean(goal_size_q_40, axis=0)
+    goal_std_q_40 = np.std(goal_size_q_40, axis=0)
             
-    plt.plot(x, goal_mean_c_47, label='Compositional RL')
-    plt.fill_between(x, goal_mean_c_47-goal_std_c_47, goal_mean_c_47+goal_std_c_47, alpha=0.2)
-    plt.plot(x, goal_mean_g_47, label='Goal Oriented RL')
-    plt.fill_between(x, goal_mean_g_47-goal_std_g_47, goal_mean_g_47+goal_std_g_47, alpha=0.2)
-    plt.plot(x, goal_mean_q_47, label='Q Learning')
-    plt.fill_between(x, goal_mean_q_47-goal_std_q_47, goal_mean_q_47+goal_std_q_47, alpha=0.2)
+    plt.plot(x, goal_mean_c_40, label='Compositional RL')
+    plt.fill_between(x, goal_mean_c_40-goal_std_c_40, goal_mean_c_40+goal_std_c_40, alpha=0.2)
+    plt.plot(x, goal_mean_g_40, label='Goal Oriented RL')
+    plt.fill_between(x, goal_mean_g_40-goal_std_g_40, goal_mean_g_40+goal_std_g_40, alpha=0.2)
+    plt.plot(x, goal_mean_q_40, label='Q Learning')
+    plt.fill_between(x, goal_mean_q_40-goal_std_q_40, goal_mean_q_40+goal_std_q_40, alpha=0.2)
+    plt.legend()
     plt.ylabel('Rewards')
     plt.xlabel('Episodes')
-    plt.title('Average shaded plot for all 47 goal experiments')
+    plt.title('Average shaded plot for all 40 goal experiments')
     plt.show()
             
-    goal_mean_c_53 = np.mean(goal_size_c_53, axis=0)        
-    goal_std_c_53 = np.std(goal_size_c_53, axis=0)
-    goal_mean_g_53 = np.mean(goal_size_g_53, axis=0)
-    goal_std_g_53 = np.std(goal_size_g_53, axis=0)
-    goal_mean_q_53 = np.mean(goal_size_q_53, axis=0)
-    goal_std_q_53 = np.std(goal_size_q_53, axis=0)
+    goal_mean_c_50 = np.mean(goal_size_c_50, axis=0)        
+    goal_std_c_50 = np.std(goal_size_c_50, axis=0)
+    goal_mean_g_50 = np.mean(goal_size_g_50, axis=0)
+    goal_std_g_50 = np.std(goal_size_g_50, axis=0)
+    goal_mean_q_50 = np.mean(goal_size_q_50, axis=0)
+    goal_std_q_50 = np.std(goal_size_q_50, axis=0)
             
-    plt.plot(x, goal_mean_c_53, label='Compositional RL')
-    plt.fill_between(x, goal_mean_c_53-goal_std_c_53, goal_mean_c_53+goal_std_c_53, alpha=0.2)
-    plt.plot(x, goal_mean_g_53, label='Goal Oriented RL')
-    plt.fill_between(x, goal_mean_g_53-goal_std_g_53, goal_mean_g_53+goal_std_g_53, alpha=0.2)
-    plt.plot(x, goal_mean_q_53, label='Q Learning')
-    plt.fill_between(x, goal_mean_q_53-goal_std_q_53, goal_mean_q_53+goal_std_q_53, alpha=0.2)
+    plt.plot(x, goal_mean_c_50, label='Compositional RL')
+    plt.fill_between(x, goal_mean_c_50-goal_std_c_50, goal_mean_c_50+goal_std_c_50, alpha=0.2)
+    plt.plot(x, goal_mean_g_50, label='Goal Oriented RL')
+    plt.fill_between(x, goal_mean_g_50-goal_std_g_50, goal_mean_g_50+goal_std_g_50, alpha=0.2)
+    plt.plot(x, goal_mean_q_50, label='Q Learning')
+    plt.fill_between(x, goal_mean_q_50-goal_std_q_50, goal_mean_q_50+goal_std_q_50, alpha=0.2)
+    plt.legend()
     plt.ylabel('Rewards')
     plt.xlabel('Episodes')
-    plt.title('Average shaded plot for all 53 goal experiments')
+    plt.title('Average shaded plot for all 50 goal experiments')
     plt.show()
             
-    goal_mean_c_61 = np.mean(goal_size_c_61, axis=0)        
-    goal_std_c_61 = np.std(goal_size_c_61, axis=0)
-    goal_mean_g_61 = np.mean(goal_size_g_61, axis=0)
-    goal_std_g_61 = np.std(goal_size_g_61, axis=0)
-    goal_mean_q_61 = np.mean(goal_size_q_61, axis=0)
-    goal_std_q_61 = np.std(goal_size_q_61, axis=0)
+    goal_mean_c_60 = np.mean(goal_size_c_60, axis=0)        
+    goal_std_c_60 = np.std(goal_size_c_60, axis=0)
+    goal_mean_g_60 = np.mean(goal_size_g_60, axis=0)
+    goal_std_g_60 = np.std(goal_size_g_60, axis=0)
+    goal_mean_q_60 = np.mean(goal_size_q_60, axis=0)
+    goal_std_q_60 = np.std(goal_size_q_60, axis=0)
             
-    plt.plot(x, goal_mean_c_61, label='Compositional RL')
-    plt.fill_between(x, goal_mean_c_61-goal_std_c_61, goal_mean_c_61+goal_std_c_61, alpha=0.2)
-    plt.plot(x, goal_mean_g_61, label='Goal Oriented RL')
-    plt.fill_between(x, goal_mean_g_61-goal_std_g_61, goal_mean_g_61+goal_std_g_61, alpha=0.2)
-    plt.plot(x, goal_mean_q_61, label='Q Learning')
-    plt.fill_between(x, goal_mean_q_61-goal_std_q_61, goal_mean_q_61+goal_std_q_61, alpha=0.2)
+    plt.plot(x, goal_mean_c_60, label='Compositional RL')
+    plt.fill_between(x, goal_mean_c_60-goal_std_c_60, goal_mean_c_60+goal_std_c_60, alpha=0.2)
+    plt.plot(x, goal_mean_g_60, label='Goal Oriented RL')
+    plt.fill_between(x, goal_mean_g_60-goal_std_g_60, goal_mean_g_60+goal_std_g_60, alpha=0.2)
+    plt.plot(x, goal_mean_q_60, label='Q Learning')
+    plt.fill_between(x, goal_mean_q_60-goal_std_q_60, goal_mean_q_60+goal_std_q_60, alpha=0.2)
+    plt.legend()
     plt.ylabel('Rewards')
     plt.xlabel('Episodes')
-    plt.title('Average shaded plot for all 53 goal experiments')
+    plt.title('Average shaded plot for all 60 goal experiments')
     plt.show()
             
-    goal_mean_c_76 = np.mean(goal_size_c_76, axis=0)        
-    goal_std_c_76 = np.std(goal_size_c_76, axis=0)
-    goal_mean_g_76 = np.mean(goal_size_g_76, axis=0)
-    goal_std_g_76 = np.std(goal_size_g_76, axis=0)
-    goal_mean_q_76 = np.mean(goal_size_q_76, axis=0)
-    goal_std_q_76 = np.std(goal_size_q_76, axis=0)
+    goal_mean_c_70 = np.mean(goal_size_c_70, axis=0)        
+    goal_std_c_70 = np.std(goal_size_c_70, axis=0)
+    goal_mean_g_70 = np.mean(goal_size_g_70, axis=0)
+    goal_std_g_70 = np.std(goal_size_g_70, axis=0)
+    goal_mean_q_70 = np.mean(goal_size_q_70, axis=0)
+    goal_std_q_70 = np.std(goal_size_q_70, axis=0)
             
-    plt.plot(x, goal_mean_c_76, label='Compositional RL')
-    plt.fill_between(x, goal_mean_c_76-goal_std_c_76, goal_mean_c_76+goal_std_c_76, alpha=0.2)
-    plt.plot(x, goal_mean_g_76, label='Goal Oriented RL')
-    plt.fill_between(x, goal_mean_g_76-goal_std_g_76, goal_mean_g_76+goal_std_g_76, alpha=0.2)
-    plt.plot(x, goal_mean_q_76, label='Q Learning')
-    plt.fill_between(x, goal_mean_q_76-goal_std_q_76, goal_mean_q_76+goal_std_q_76, alpha=0.2)
+    plt.plot(x, goal_mean_c_70, label='Compositional RL')
+    plt.fill_between(x, goal_mean_c_70-goal_std_c_70, goal_mean_c_70+goal_std_c_70, alpha=0.2)
+    plt.plot(x, goal_mean_g_70, label='Goal Oriented RL')
+    plt.fill_between(x, goal_mean_g_70-goal_std_g_70, goal_mean_g_70+goal_std_g_70, alpha=0.2)
+    plt.plot(x, goal_mean_q_70, label='Q Learning')
+    plt.fill_between(x, goal_mean_q_70-goal_std_q_70, goal_mean_q_70+goal_std_q_70, alpha=0.2)
+    plt.legend()
     plt.ylabel('Rewards')
     plt.xlabel('Episodes')
-    plt.title('Average shaded plot for all 76 goal experiments')
-    plt.show() '''
+    plt.title('Average shaded plot for all 70 goal experiments')
+    plt.show()
     
     # Step vs epsiode plots including inter-quartile range 
-    step_goal_size_mean_c_7 = np.mean(step_goal_size_c_7, axis=0) 
-    step_goal_size_mean_g_7 = np.mean(step_goal_size_g_7, axis=0)  
-    step_goal_size_mean_q_7 = np.mean(step_goal_size_q_7, axis=0)   
-    step_goal_size_mean_c_16 = np.mean(step_goal_size_c_16, axis=0) 
-    step_goal_size_mean_g_16 = np.mean(step_goal_size_g_16, axis=0) 
-    step_goal_size_mean_q_16 = np.mean(step_goal_size_q_16, axis=0) 
-    step_goal_size_mean_c_32 = np.mean(step_goal_size_c_32, axis=0) 
-    step_goal_size_mean_g_32 = np.mean(step_goal_size_g_32, axis=0) 
-    step_goal_size_mean_q_32 = np.mean(step_goal_size_q_32, axis=0) 
-    step_goal_size_mean_c_47 = np.mean(step_goal_size_c_47, axis=0) 
-    step_goal_size_mean_g_47 = np.mean(step_goal_size_g_47, axis=0) 
-    step_goal_size_mean_q_47 = np.mean(step_goal_size_q_47, axis=0) 
-    step_goal_size_mean_c_53 = np.mean(step_goal_size_g_53, axis=0) 
-    step_goal_size_mean_g_53 = np.mean(step_goal_size_c_53, axis=0) 
-    step_goal_size_mean_q_53 = np.mean(step_goal_size_q_53, axis=0) 
-    step_goal_size_mean_c_61 = np.mean(step_goal_size_c_61, axis=0) 
-    step_goal_size_mean_g_61 = np.mean(step_goal_size_g_61, axis=0)
-    step_goal_size_mean_q_61 = np.mean(step_goal_size_q_61, axis=0)
-    step_goal_size_mean_c_76 = np.mean(step_goal_size_c_76, axis=0) 
-    step_goal_size_mean_g_76 = np.mean(step_goal_size_g_76, axis=0) 
-    step_goal_size_mean_q_76 = np.mean(step_goal_size_q_76, axis=0)              
+    step_goal_size_mean_c_10 = np.mean(step_goal_size_c_10, axis=0) 
+    step_goal_size_mean_g_10 = np.mean(step_goal_size_g_10, axis=0)  
+    step_goal_size_mean_q_10 = np.mean(step_goal_size_q_10, axis=0)   
+    step_goal_size_mean_c_20 = np.mean(step_goal_size_c_20, axis=0) 
+    step_goal_size_mean_g_20 = np.mean(step_goal_size_g_20, axis=0) 
+    step_goal_size_mean_q_20 = np.mean(step_goal_size_q_20, axis=0) 
+    step_goal_size_mean_c_30 = np.mean(step_goal_size_c_30, axis=0) 
+    step_goal_size_mean_g_30 = np.mean(step_goal_size_g_30, axis=0) 
+    step_goal_size_mean_q_30 = np.mean(step_goal_size_q_30, axis=0) 
+    step_goal_size_mean_c_40 = np.mean(step_goal_size_c_40, axis=0) 
+    step_goal_size_mean_g_40 = np.mean(step_goal_size_g_40, axis=0) 
+    step_goal_size_mean_q_40 = np.mean(step_goal_size_q_40, axis=0) 
+    step_goal_size_mean_c_50 = np.mean(step_goal_size_g_50, axis=0) 
+    step_goal_size_mean_g_50 = np.mean(step_goal_size_c_50, axis=0) 
+    step_goal_size_mean_q_50 = np.mean(step_goal_size_q_50, axis=0) 
+    step_goal_size_mean_c_60 = np.mean(step_goal_size_c_60, axis=0) 
+    step_goal_size_mean_g_60 = np.mean(step_goal_size_g_60, axis=0)
+    step_goal_size_mean_q_60 = np.mean(step_goal_size_q_60, axis=0)
+    step_goal_size_mean_c_70 = np.mean(step_goal_size_c_70, axis=0) 
+    step_goal_size_mean_g_70 = np.mean(step_goal_size_g_70, axis=0) 
+    step_goal_size_mean_q_70 = np.mean(step_goal_size_q_70, axis=0)              
     
     # https://www.datacamp.com/tutorial/python-boxplots
-    data_group_1 = [step_goal_size_mean_c_7, step_goal_size_mean_g_7, step_goal_size_mean_q_7]
-    data_group_2 = [step_goal_size_mean_c_16, step_goal_size_mean_g_16, step_goal_size_mean_q_16]
-    data_group_3 = [step_goal_size_mean_c_32, step_goal_size_mean_g_32, step_goal_size_mean_q_32]
-    data_group_4 = [step_goal_size_mean_c_47, step_goal_size_mean_g_47, step_goal_size_mean_q_47]
-    data_group_5 = [step_goal_size_mean_c_53, step_goal_size_mean_g_53, step_goal_size_mean_q_53]
-    data_group_6 = [step_goal_size_mean_c_61, step_goal_size_mean_g_61, step_goal_size_mean_q_61]
-    data_group_7 = [step_goal_size_mean_c_76, step_goal_size_mean_g_76, step_goal_size_mean_q_76]
+    data_group_1 = [step_goal_size_mean_c_10, step_goal_size_mean_g_10, step_goal_size_mean_q_10]
+    data_group_2 = [step_goal_size_mean_c_20, step_goal_size_mean_g_20, step_goal_size_mean_q_20]
+    data_group_3 = [step_goal_size_mean_c_30, step_goal_size_mean_g_30, step_goal_size_mean_q_30]
+    data_group_4 = [step_goal_size_mean_c_40, step_goal_size_mean_g_40, step_goal_size_mean_q_40]
+    data_group_5 = [step_goal_size_mean_c_50, step_goal_size_mean_g_50, step_goal_size_mean_q_50]
+    data_group_6 = [step_goal_size_mean_c_60, step_goal_size_mean_g_60, step_goal_size_mean_q_60]
+    data_group_7 = [step_goal_size_mean_c_70, step_goal_size_mean_g_70, step_goal_size_mean_q_70]
     data =  data_group_1 + data_group_2 + data_group_3 + data_group_4 + data_group_5 + data_group_6 + data_group_7    
-    plt.boxplot(data, labels=['7-C', '7-G', '7-Q', '16-C', '16-G', '16-Q','32-C', '32-G', '32-Q', '47-C', '47-G', '47-Q', '53-C', '53-G', '53-Q', '61-C', '61-G', '61-Q', 
-                             '76-C', '76-G', '76-Q'])
-    plt.ylabel('Steps')    
+    plt.boxplot(data, labels=['10-C', '10-G', '10-Q', '20-C', '20-G', '20-Q','30-C', '30-G', '30-Q', '40-C', '40-G', '40-Q', 
+                              '50-C', '50-G', '50-Q', '60-C', '60-G', '60-Q', '70-C', '70-G', '70-Q'])
+    plt.ylabel('Steps') 
+    plt.xlabel('Goal size - Method')
     plt.title('Quartile Range Plot for all goal sizes')
     plt.show()
             
@@ -499,6 +505,7 @@ def compare():
     plt.fill_between(x, mean_g - std_g, mean_g + std_g, alpha=0.2)
     plt.plot(x, mean_q, label='Q Learning')
     plt.fill_between(x, mean_q - std_q, mean_q + std_q, alpha=0.2)
+    plt.legend()
     plt.ylabel('Rewards')
     plt.xlabel('Episodes')
     plt.title('Average shaded plot for all experiments')
@@ -507,6 +514,7 @@ def compare():
     # plottting the rewards versus interquartile range per method
     data = [mean_c, mean_g, mean_q]
     plt.boxplot(data, labels=['Comp RL', 'Goal RL', 'Q learning RL'])
+    plt.legend()
     plt.ylabel('Rewards')    
     plt.title('Rewards interquartile range')
     plt.show()
@@ -520,6 +528,7 @@ def compare():
     plt.plot(x, step_mean_c, label='Compositional RL')
     plt.plot(x, step_mean_g, label='Goal Oriented RL')
     plt.plot(x, step_mean_q, label= 'Q learning RL')
+    plt.legend()
     plt.title('Average number of steps per episode')    
     plt.ylabel('Steps')
     plt.xlabel('Episode')
@@ -527,22 +536,23 @@ def compare():
     
     
     # shift + ctrl + A for multiline comment
-    ''' variables = ["Comp RL", "Goal RL", "Q Learning RL"]
-    d_1 = [x_7, x_16, x_32, x_47, x_53, x_61, x_76]
-    d_2 = [b_7, b_16, b_32, b_47, b_53, b_61, b_76]
-    d_1 = [c_7, c_16, c_32, c_47, c_53, c_61, c_76]
-    x = ['7', '16', '32', '47', '53', '61', '76']
+    variables = ["Comp RL", "Goal RL", "Q Learning RL"]
+    d_1 = [x_10, x_20, x_30, x_40, x_50, x_60, x_70]
+    d_2 = [b_10, b_20, b_30, b_40, b_50, b_60, b_70]
+    d_1 = [c_10, c_20, c_30, c_40, c_50, c_60, c_70]
+    x = ['10', '20', '30', '40', '50', '60', '70']
     
-    mean_1 = [np.mean(x_7), np.mean(x_16), np.mean(x_32), np.mean(x_47), np.mean(x_53), np.mean(x_61), np.mean(x_76)]
-    mean_2 = [np.mean(b_7), np.mean(b_16), np.mean(b_32), np.mean(b_47), np.mean(b_53), np.mean(b_61), np.mean(b_76)]
-    mean_3 = [np.mean(c_7), np.mean(c_16), np.mean(c_32), np.mean(c_47), np.mean(c_53), np.mean(c_61), np.mean(c_76)]
+    mean_1 = [np.mean(x_10), np.mean(x_20), np.mean(x_30), np.mean(x_40), np.mean(x_50), np.mean(x_60), np.mean(x_70)]
+    mean_2 = [np.mean(b_10), np.mean(b_20), np.mean(b_30), np.mean(b_40), np.mean(b_50), np.mean(b_60), np.mean(b_70)]
+    mean_3 = [np.mean(c_10), np.mean(c_20), np.mean(c_30), np.mean(c_40), np.mean(c_50), np.mean(c_60), np.mean(c_70)]
     
-    std_1 = [np.std(x_7), np.std(x_16), np.std(x_32), np.std(x_47), np.std(x_53), np.std(x_61), np.std(x_76)]
-    std_2 = [np.std(b_7), np.std(b_16), np.std(b_32), np.std(b_47), np.std(b_53), np.std(b_61), np.std(b_76)]
-    std_3 = [np.std(c_7), np.std(c_16), np.std(c_32), np.std(c_47), np.std(c_53), np.std(c_61), np.std(c_76)]
+    std_1 = [np.std(x_10), np.std(x_20), np.std(x_30), np.std(x_40), np.std(x_50), np.std(x_60), np.std(x_70)]
+    std_2 = [np.std(b_10), np.std(b_20), np.std(b_30), np.std(b_40), np.std(b_50), np.std(b_60), np.std(b_70)]
+    std_3 = [np.std(c_10), np.std(c_20), np.std(c_30), np.std(c_40), np.std(c_50), np.std(c_60), np.std(c_70)]
     plt.errorbar(x, mean_1, yerr=std_1, fmt='o', capsize=5, label='Comp RL Mean with Std Dev')
     plt.errorbar(x, mean_2, yerr=std_2, fmt='o', capsize=5, label='Goal RL Mean with Std Dev')
     plt.errorbar(x, mean_3, yerr=std_3, fmt='o', capsize=5, label='Q Learning RL Mean with Std Dev')
+    plt.legend()
     #plt.plot(x, mean_1)
     #plt.fill_between(x, mean_1 - std_1, mean_1 + std_1, alpha=0.2)
     #plt.plot(x, mean_2)
@@ -552,7 +562,7 @@ def compare():
     plt.ylabel('Rewards')
     plt.xlabel('Goal Sizes')
     plt.title('Mean and the standard deviation of the rewards per goal size')
-    plt.show() '''
+    plt.show() 
 
       
 
