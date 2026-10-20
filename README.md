@@ -56,3 +56,13 @@ Survival-Reinforcement-Learning/
 ├── .gitignore                   # Dataset, Checkpoint & Environment Exclusions
 ├── requirements.txt             # Project Dependencies
 └── README.md                    # Project Documentation
+
+---
+
+## 📖 Dissertation Document
+
+The full Master of Science dissertation accompanying this research is stored directly in this repository:
+* **[Read / Download MSc Dissertation PDF (`docs/thesis.pdf`)](./docs/thesis.pdf)**
+
+**Citation:**
+> Nyabadza, C. I. (2026). *Modelling Survival Through Composition of Reinforcement Learning Policies*. Master of Science dissertation, School of Computer Science & Applied Mathematics, University of the Witwatersrand, Johannesburg.
