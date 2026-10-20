@@ -1,0 +1,14 @@
+
+# Ignore large dataset files & checkpoints
+*.npy
+*.pt
+*.pth
+checkpoint
+logs/
+
+# Ignore virtual environments & caches
+.venv/
+venv/
+__pycache__/
+.ipynb_checkpoints/
+.continue/
